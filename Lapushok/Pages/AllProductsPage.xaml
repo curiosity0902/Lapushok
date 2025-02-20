@@ -1,0 +1,91 @@
+﻿<Page x:Class="Lapushok.Pages.AllProductsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Lapushok.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="830" d:DesignWidth="1550"
+      Title="AllProductsPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBox Text="Введите для поиска"
+            FontSize="20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            x:Name="SearchTbx"
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="2"
+            Width="450"
+            Height="60"
+            Margin="-110 0 0 0"
+            />
+
+        <ListView x:Name="ProductsLv"
+            Margin="-130 0 0 0"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="6"
+            Grid.RowSpan="6"
+            Width="950"
+            Height="600"
+            ItemsSource="{Binding products}" d:ItemsSource="{d:SampleData ItemCount=5}"
+                  >
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Columns="1"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10">
+                        <Grid Height="120" Width="900">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image Margin="10 5 0 0" Source="{Binding Photo}" Width="100" Height="100" Grid.Column="0"/>
+
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Grid.Column="1">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding TypeProduct.Name}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                    <TextBlock Text=" | " FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                    <TextBlock Text="{Binding Name}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                </StackPanel>
+                                <TextBlock Text="{Binding Articul}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                <TextBlock Text="{Binding MaterialsList}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,5,10,0" Grid.Column="2">
+                                <TextBlock Text="{Binding MinCostForAgent}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                <TextBlock Text=" рублей" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+    </Grid>
+</Page>
