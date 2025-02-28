@@ -231,7 +231,7 @@
             >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Название материала" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Header="Название материала" Width="440" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn>
                         <DataTemplate>
                             <Button>
