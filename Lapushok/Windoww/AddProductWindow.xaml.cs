@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lapushok.DB;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,21 @@ namespace Lapushok.Windoww
     /// </summary>
     public partial class AddProductWindow : Window
     {
+        public static List<Product> products { get; set; }
+        public static List<Material> materials { get; set; }
         public AddProductWindow()
         {
             InitializeComponent();
+
+            products = new List<Product>(DBConnection.lapushokEntities.Product.ToList());
+            materials = new List<Material>(DBConnection.lapushokEntities.Material.ToList());
+
+            MaterialsLv.ItemsSource = materials;
+        }
+
+        private void MaterialCbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

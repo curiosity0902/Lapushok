@@ -69,5 +69,13 @@ namespace Lapushok.DB
             }
         }
 
+
+        public string MiddleCost
+        {
+            get
+            {
+                return $"{(ProductMaterial.Sum(x => x.CountMaterial * x.Material.Cost))/(IDProduct )}";
+            }
+        }
     }
 }

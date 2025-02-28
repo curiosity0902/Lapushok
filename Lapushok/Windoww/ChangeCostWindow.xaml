@@ -40,6 +40,21 @@
             />
 
 
+        <TextBlock Style="{StaticResource TextBlockText}"
+            HorizontalAlignment="Center"
+            Padding="10"
+            VerticalAlignment="Center"
+            x:Name="SearchTbl"
+            Grid.Row="1"
+            Grid.Column="1"
+            Grid.ColumnSpan="4"
+            Grid.RowSpan="2"
+            Width="320"
+            Height="50"
+            MouseDown="SearchTbl_MouseDown"
+            />
+
+
         <Button Content="Изменить цену"
             Style="{StaticResource ButtonBoxText}"
             HorizontalAlignment="Center"
@@ -50,7 +65,7 @@
             Grid.ColumnSpan="4"
             Grid.RowSpan="2"
             Width="250"
-            Height="40"
+            Height="40" Click="AddBtn_Click"
             >
             <Button.Resources>
                 <Style TargetType="Border">

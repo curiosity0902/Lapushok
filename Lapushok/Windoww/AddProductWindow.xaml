@@ -120,6 +120,19 @@
             Grid.ColumnSpan="1"
             Grid.RowSpan="1"
             />
+        
+        <Image 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            x:Name="Photo"
+            Grid.Row="1"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="1"
+            Width="150"
+            Height="150" 
+            />
+
         <ComboBox Style="{StaticResource ComboBoxText}"
             HorizontalAlignment="Center"
             Padding="10"
@@ -130,7 +143,7 @@
             Grid.ColumnSpan="2"
             Grid.RowSpan="1"
             Width="270"
-            Height="50"
+            Height="50" SelectionChanged="MaterialCbx_SelectionChanged"
             >
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -207,10 +220,29 @@
             Height="50"
             />
 
-        <ListView>
+        <ListView
+            x:Name="MaterialsLv"
+            Grid.Row="4"
+            Grid.Column="3"
+            Grid.ColumnSpan="3"
+            Grid.RowSpan="3"
+            Width="440"
+            Height="230"
+            >
             <ListView.View>
                 <GridView>
-                   
+                    <GridViewColumn Header="Название материала" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn>
+                        <DataTemplate>
+                            <Button>
+                                <Button.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="CornerRadius" Value="15"/>
+                                    </Style>
+                                </Button.Resources>
+                            </Button>
+                        </DataTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
