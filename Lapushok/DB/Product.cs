@@ -36,6 +36,7 @@ namespace Lapushok.DB
         public Nullable<int> WeightWithPacket { get; set; }
         public string GOST { get; set; }
         public string ISO { get; set; }
+        public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HistoryMinCostProduct> HistoryMinCostProduct { get; set; }

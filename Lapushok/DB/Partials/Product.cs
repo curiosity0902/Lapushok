@@ -34,21 +34,40 @@ namespace Lapushok.DB
 
             }
         }
-        
-        //public string ColorCard
-        //{
-        //    get 
-        //    {
-        //        string result = "#ff4c5b";
-        //        if (DateTime.mon)
-        //        {
-        //            return
-        //        }
-        //        else
-        //        {
-        //            return 
-        //        }
-        //    }
-        //}
+
+        public string ColorCard
+        {
+            get
+            {
+                bool hasBeenSoldInLastMonth = CheckSalesInLastMonth(); 
+
+                if (!hasBeenSoldInLastMonth)
+                {
+                    return "#ffcccc"; 
+                }
+                else
+                {
+                    return "#ffffff"; 
+                }
+            }
+        }
+
+        private bool CheckSalesInLastMonth()
+        {
+            DateTime oneMonthAgo = DateTime.Now.AddMonths(-1);
+
+            var salesCount = HistoryRealesProduct.Where(s => s.Date >= oneMonthAgo).Count();
+
+            return salesCount > 0;
+        }
+
+        public string RealCost
+        {
+            get 
+            {
+                return $"{ProductMaterial.Sum(x => x.CountMaterial * x.Material.Cost)} руб.";
+            }
+        }
+
     }
 }

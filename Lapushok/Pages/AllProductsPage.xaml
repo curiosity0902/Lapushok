@@ -8,6 +8,7 @@
       d:DesignHeight="830" d:DesignWidth="1550"
       Title="AllProductsPage">
 
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -26,66 +27,206 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <TextBox Text="Введите для поиска"
-            FontSize="20"
+        <TextBox Style="{StaticResource TextBoxText}"
             HorizontalAlignment="Center"
+            Padding="10"
             VerticalAlignment="Center"
             x:Name="SearchTbx"
             Grid.Row="0"
             Grid.Column="1"
             Grid.ColumnSpan="2"
             Grid.RowSpan="2"
-            Width="450"
+            Width="420"
             Height="60"
-            Margin="-110 0 0 0"
+            Margin="-145 0 0 20"
+            TextChanged="SearchTbx_TextChanged"
             />
 
-        <ListView x:Name="ProductsLv"
+        <TextBlock Text="Введите для поиска"
+            Padding="10"
+            Style="{StaticResource TextBlockText}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            x:Name="SearchTbl"
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="2"
+            Width="420"
+            Height="60"
+            Margin="-145 0 0 20"
+            MouseDown="SearchTbl_MouseDown_1"
+            />
+
+        <ComboBox Text="Сортировка" Padding="5"
+            Style="{StaticResource ComboBoxText}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            x:Name="TypeCbx"
+            Grid.Row="0"
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="2"
+            Width="250"
+            Height="60"
+            Margin="30 0 0 20"
+            ItemsSource="{Binding typeProducts}" SelectionChanged="TypeCbx_SelectionChanged"
+            >
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Style="{StaticResource TextBlockText}" Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <ComboBox Text="Сортировка" Padding="8"
+            Style="{StaticResource ComboBoxText}"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            x:Name="DownUpCbx"
+            Grid.Row="0"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="2"
+            Width="250"
+            Height="60"
+            Margin="153,92,0,0" SelectionChanged="Cbx_SelectionChanged"
+            >
+            <ComboBoxItem Padding="5" Style="{StaticResource ComboBoxItemText}" Content="Наименования по возрастанию"/>
+            <ComboBoxItem Style="{StaticResource ComboBoxItemText}" Content="Наименования по убыванию"/>
+            <ComboBoxItem Style="{StaticResource ComboBoxItemText}" Content="Номер цеха по возрастанию"/>
+            <ComboBoxItem Style="{StaticResource ComboBoxItemText}" Content="Номер цеха по убыванию"/>
+            <ComboBoxItem Style="{StaticResource ComboBoxItemText}" Content="Минимальная стоимость по возрастанию"/>
+            <ComboBoxItem Style="{StaticResource ComboBoxItemText}" Content="Минимальная стоимость по убыванию"/>
+        </ComboBox>
+
+        <Button Content="Добавить продукт"
+            Style="{StaticResource ButtonBoxText}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            x:Name="AddBtn"
+            Grid.Row="2"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="2"
+            Width="250"
+            Height="50"
+            Margin="140 0 0 0"
+            Click="AddBtn_Click"
+            >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button Content="Изменить стоимость"
+            Visibility="Collapsed"
+            Style="{StaticResource ButtonBoxText}"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            x:Name="ChangeCostBtn"
+            Grid.Row="2"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="2"
+            Width="250"
+            Height="50"
+            Margin="140 150 0 0"
+            Click="ChangeCostBtn_Click"
+            >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <!--<Button Content="Удалить продукт"
+            FontSize="20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            x:Name="DeleteBtn"
+            Grid.Row="3"
+            Grid.Column="4"
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="2"
+            Width="250"
+            Height="50"
+            Margin="140 40 0 0"
+            >
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+        </Button>-->
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+            Margin="0 0 0 0"
+            Grid.Row="1"
+            Grid.Column="0"
+            Grid.ColumnSpan="6"
+            Grid.RowSpan="6"
+            Width="1100"
+            Height="600"
+                    >
+            <ListView x:Name="ProductsLv"
             Margin="-130 0 0 0"
             Grid.Row="1"
             Grid.Column="0"
             Grid.ColumnSpan="6"
             Grid.RowSpan="6"
             Width="950"
-            Height="600"
-            ItemsSource="{Binding products}" d:ItemsSource="{d:SampleData ItemCount=5}"
+            Height="530"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            ScrollViewer.VerticalScrollBarVisibility="Hidden"
+            ItemsSource="{Binding products}" d:ItemsSource="{d:SampleData ItemCount=5}" 
+            SelectionChanged="ProductsLv_SelectionChanged"
+            MouseDoubleClick="ProductsLv_MouseDoubleClick"
+            SelectionMode="Extended"
                   >
-            <ListView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="1"/>
-                </ItemsPanelTemplate>
-            </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10">
-                        <Grid Height="120" Width="900">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="1"/>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10" Margin="0 5 0 0" Background="{Binding ColorCard}">
+                            <Grid Height="120" Width="930" >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
 
-                            <Image Margin="10 5 0 0" Source="{Binding Photo}" Width="100" Height="100" Grid.Column="0"/>
+                                <Image Margin="10 5 0 0" Source="{Binding Photo}" Width="100" Height="100" Grid.Column="0"/>
 
-                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Grid.Column="1">
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding TypeProduct.Name}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
-                                    <TextBlock Text=" | " FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
-                                    <TextBlock Text="{Binding Name}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,5,0,0" Grid.Column="1">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding TypeProduct.Name}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                        <TextBlock Text=" | " FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                        <TextBlock Text="{Binding Name}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Articul}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                    <TextBlock Text="{Binding MaterialsList}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
                                 </StackPanel>
-                                <TextBlock Text="{Binding Articul}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
-                                <TextBlock Text="{Binding MaterialsList}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
-                            </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,5,10,0" Grid.Column="2">
-                                <TextBlock Text="{Binding MinCostForAgent}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
-                                <TextBlock Text=" рублей" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-
-        </ListView>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20,5,10,0" Grid.Column="2">
+                                    <TextBlock Text="{Binding RealCost}" FontSize="21" Foreground="Black" FontFamily="Gabriola"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackPanel Height="10"/>
+            <StackPanel x:Name="NavSp" 
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"/>
+        </StackPanel>
     </Grid>
 </Page>

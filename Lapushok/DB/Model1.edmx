@@ -119,6 +119,7 @@
           <Property Name="IDProduct" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="250" />
           <Property Name="Articul" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="250" />
           <Property Name="MinCostForAgent" Type="int" />
           <Property Name="Image" Type="nvarchar(max)" />
           <Property Name="IDTypeProduct" Type="int" />
@@ -785,6 +786,7 @@
           <NavigationProperty Name="TypeProduct" Relationship="Self.FK_Product_TypeProduct" FromRole="Product" ToRole="TypeProduct" />
           <NavigationProperty Name="ProductMaterial" Relationship="Self.FK_ProductMaterial_Product" FromRole="Product" ToRole="ProductMaterial" />
           <NavigationProperty Name="SostavAplication" Relationship="Self.FK_SostavAplication_Product" FromRole="Product" ToRole="SostavAplication" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ProductMaterial">
           <Key>
@@ -1438,6 +1440,7 @@
           <EntitySetMapping Name="Product">
             <EntityTypeMapping TypeName="LapushokModel.Product">
               <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Articul" ColumnName="Articul" />
